@@ -3,363 +3,762 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Risha | Fashion Designer</title>
+<title>Risha Navisha — Fashion Designer & Influencer</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-:root{
-    --bg:#0D0D0D;
-    --surface:#1A1A1A;
-    --gold:#C9A96E;
-    --ivory:#F5F0E8;
+/* ── RESET ── */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html { scroll-behavior: smooth; }
+
+:root {
+    --black:  #070707;
+    --dark:   #111111;
+    --surface:#181818;
+    --gold:   #B8975A;
+    --gold-l: #D4AF7A;
+    --white:  #F8F3EE;
+    --muted:  #666666;
+    --border: rgba(184,151,90,0.2);
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    scroll-behavior:smooth;
+body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
 }
 
-body{
-    background:var(--bg);
-    color:var(--ivory);
-    font-family:'DM Sans',sans-serif;
-    overflow-x:hidden;
+/* grain overlay */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 9000;
 }
 
-/* Grain texture overlay */
-body::before{
-    content:"";
-    position:fixed;
-    top:0; left:0;
-    width:100%;
-    height:100%;
-    pointer-events:none;
-    background-image:url("https://grainy-gradients.vercel.app/noise.svg");
-    opacity:0.05;
-    z-index:1;
+/* ── CURSOR ── */
+.cursor-inner {
+    width: 8px; height: 8px;
+    background: var(--white);
+    border-radius: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    transition: width .2s, height .2s;
+    z-index: 9999;
+    pointer-events: none;
+}
+.cursor-outer {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    z-index: 9998;
+    pointer-events: none;
+    transition: width .2s, height .2s;
 }
 
-/* Custom Cursor */
-.cursor-dot, .cursor-outline{
-    position:fixed;
-    top:0; left:0;
-    pointer-events:none;
-    border-radius:50%;
-    transform:translate(-50%,-50%);
-    z-index:9999;
+/* ── NAV ── */
+nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    padding: 28px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background .4s, padding .4s, border-color .4s;
+    border-bottom: 1px solid transparent;
 }
-.cursor-dot{
-    width:6px;
-    height:6px;
-    background:var(--gold);
+nav.scrolled {
+    background: rgba(7,7,7,0.92);
+    backdrop-filter: blur(16px);
+    padding: 18px 6%;
+    border-color: var(--border);
 }
-.cursor-outline{
-    width:30px;
-    height:30px;
-    border:1px solid var(--gold);
-    transition:all .15s ease-out;
+.nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: 6px;
+    color: var(--white);
+    text-decoration: none;
 }
+.nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+}
+.nav-links a {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color .3s;
+}
+.nav-links a:hover { color: var(--gold); }
 
-/* Typography */
-h1,h2,h3{
-    font-family:'Playfair Display',serif;
-    letter-spacing:1px;
-}
-
-section{
-    padding:120px 8%;
-    position:relative;
-    z-index:2;
-}
-
-.fade-up{
-    opacity:0;
-    transform:translateY(40px);
-    transition:all .8s ease;
-}
-.fade-up.show{
-    opacity:1;
-    transform:translateY(0);
-}
-
-/* HERO */
-.hero{
-    height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 8%;
-}
-
-.hero-text{
-    max-width:600px;
-}
-
-.hero h1{
-    font-size:80px;
-    line-height:1.1;
-}
-
-.subtitle{
-    text-transform:uppercase;
-    letter-spacing:5px;
-    font-size:12px;
-    margin-top:20px;
-    color:var(--gold);
-}
-
-.cta{
-    display:inline-block;
-    margin-top:40px;
-    padding:14px 36px;
-    border:1px solid var(--gold);
-    color:var(--ivory);
-    text-decoration:none;
-    position:relative;
-}
-
-.cta::after{
-    content:"";
-    position:absolute;
-    bottom:-5px;
-    left:0;
-    width:0;
-    height:2px;
-    background:var(--gold);
-    transition:width .3s ease;
-}
-
-.cta:hover::after{
-    width:100%;
-}
-
-.hero-image{
-    width:320px;
-    aspect-ratio:3/4;
-    background:var(--surface);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#777;
-    font-size:14px;
-    border-radius: 8px;
+/* ── HERO ── */
+.hero {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 55% 45%;
+    position: relative;
     overflow: hidden;
 }
 
-/* ABOUT */
-.about{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:60px;
-    align-items:center;
+.hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 6% 10vh;
+    position: relative;
+    z-index: 2;
 }
 
-.portrait{
-    aspect-ratio:3/4;
-    border:2px solid var(--gold);
-    position:relative;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#777;
+.hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
 }
 
-.portrait::before, .portrait::after{
-    content:"";
-    position:absolute;
-    width:30px;
-    height:30px;
-    border:2px solid var(--gold);
+.hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(68px, 9vw, 128px);
+    font-weight: 300;
+    line-height: 0.92;
+    letter-spacing: -2px;
+    margin-bottom: 32px;
 }
-.portrait::before{
-    top:-10px; left:-10px;
-    border-right:none;
-    border-bottom:none;
-}
-.portrait::after{
-    bottom:-10px; right:-10px;
-    border-left:none;
-    border-top:none;
+.hero h1 em {
+    font-style: italic;
+    color: var(--gold-l);
 }
 
-/* LOOKBOOK */
-.lookbook-grid{
-    columns:3 250px;
-    column-gap:30px;
+.hero-desc {
+    max-width: 380px;
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--muted);
+    margin-bottom: 52px;
 }
 
-.look{
-    break-inside:avoid;
-    margin-bottom:30px;
-    aspect-ratio:3/4;
-    background:var(--surface);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-    overflow:hidden;
-    color:#777;
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 36px;
 }
 
-.look::after{
-    content:attr(data-label);
-    position:absolute;
-    bottom:15px;
-    left:15px;
-    color:var(--gold);
-    letter-spacing:2px;
+.btn-primary {
+    display: inline-block;
+    padding: 15px 40px;
+    background: var(--gold);
+    color: #000;
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background .3s, transform .3s;
+}
+.btn-primary:hover {
+    background: var(--gold-l);
+    transform: translateY(-2px);
 }
 
-.look:hover{
-    transform:scale(1.03);
-    transition:.4s;
+.btn-ghost {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color .3s;
+}
+.btn-ghost:hover { color: var(--white); }
+
+.hero-right {
+    position: relative;
+    overflow: hidden;
+}
+.hero-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+}
+/* blend left edge into background */
+.hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--black) 0%, transparent 25%);
+    z-index: 1;
 }
 
-/* SOCIAL */
-.social{
-    text-align:center;
-    background:var(--surface);
+.hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 6%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    z-index: 2;
+}
+.hero-scroll::before {
+    content: '';
+    width: 36px;
+    height: 1px;
+    background: var(--gold);
 }
 
-.social h2{
-    margin-bottom:20px;
+/* ── MARQUEE ── */
+.marquee-wrap {
+    overflow: hidden;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 0;
+    position: relative;
+    z-index: 2;
+}
+.marquee-track {
+    display: flex;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+}
+.marquee-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--gold);
+    padding: 0 36px;
+    display: inline-flex;
+    align-items: center;
+    gap: 36px;
+}
+.marquee-item::after {
+    content: '◆';
+    font-size: 7px;
+    color: var(--muted);
+    font-style: normal;
+}
+@keyframes marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
-.gold-link{
-    color:var(--gold);
-    text-decoration:none;
+/* ── SECTION LABEL ── */
+.section-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.section-label::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--gold);
+    flex-shrink: 0;
 }
 
-.whatsapp-btn{
-    display:inline-block;
-    margin-top:30px;
-    padding:14px 36px;
-    background:var(--gold);
-    color:#000;
-    text-decoration:none;
+/* ── ABOUT ── */
+.about {
+    padding: 130px 6%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
 }
 
-/* FOOTER */
-footer{
-    text-align:center;
-    padding:60px 8%;
-    border-top:1px solid #222;
+.about-img-wrap {
+    position: relative;
+}
+.about-img-wrap img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+}
+/* decorative offset border */
+.about-img-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -14px;
+    border: 1px solid var(--border);
+    z-index: -1;
+}
+/* decorative bg block */
+.about-img-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: -24px;
+    right: -24px;
+    width: 55%;
+    height: 55%;
+    background: var(--surface);
+    z-index: -2;
 }
 
-.logo{
-    font-size:40px;
+.about h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 4vw, 58px);
+    font-weight: 300;
+    line-height: 1.08;
+    margin-bottom: 28px;
+}
+.about h2 em {
+    font-style: italic;
+    color: var(--gold-l);
 }
 
-.icons a{
-    margin:0 10px;
-    color:var(--gold);
-    text-decoration:none;
+.about p {
+    font-size: 14px;
+    line-height: 1.95;
+    color: #999;
+    margin-bottom: 18px;
 }
 
-/* Responsive */
-@media(max-width:900px){
-    .hero{
-        flex-direction:column;
-        justify-content:center;
-        text-align:center;
+.about-stats {
+    display: flex;
+    gap: 48px;
+    margin-top: 48px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+}
+.stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+}
+.stat-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 8px;
+}
+
+/* ── LOOKBOOK ── */
+.lookbook {
+    padding: 130px 6%;
+    background: var(--surface);
+    position: relative;
+    z-index: 2;
+}
+
+.lookbook-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 60px;
+}
+.lookbook h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 4vw, 58px);
+    font-weight: 300;
+    line-height: 1.08;
+}
+.lookbook h2 em {
+    font-style: italic;
+    color: var(--gold-l);
+}
+.lookbook-sub {
+    font-size: 13px;
+    color: var(--muted);
+    max-width: 260px;
+    text-align: right;
+    line-height: 1.75;
+}
+
+.lookbook-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.look {
+    position: relative;
+    overflow: hidden;
+    background: var(--dark);
+}
+.look img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .7s ease;
+}
+.look:hover img { transform: scale(1.06); }
+
+.look:nth-child(1) { aspect-ratio: 3/4; }
+.look:nth-child(2) { aspect-ratio: 3/5; }
+.look:nth-child(3) { aspect-ratio: 3/4; }
+
+.look-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
+    opacity: 0;
+    transition: opacity .4s;
+    display: flex;
+    align-items: flex-end;
+    padding: 24px;
+}
+.look:hover .look-overlay { opacity: 1; }
+.look-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-l);
+}
+
+/* ── CONTACT ── */
+.contact {
+    padding: 150px 6%;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+.contact h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(50px, 7vw, 96px);
+    font-weight: 300;
+    line-height: 1.05;
+    margin: 20px 0 28px;
+}
+.contact h2 em {
+    font-style: italic;
+    color: var(--gold-l);
+}
+.contact-sub {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 auto 64px;
+    line-height: 1.85;
+}
+.contact-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.contact-instagram {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    padding: 16px 32px;
+    transition: border-color .3s, color .3s;
+}
+.contact-instagram:hover {
+    border-color: var(--gold);
+    color: var(--gold-l);
+}
+.contact-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gold);
+    color: #000;
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 16px 32px;
+    transition: background .3s, transform .3s;
+}
+.contact-whatsapp:hover {
+    background: var(--gold-l);
+    transform: translateY(-2px);
+}
+
+/* ── FOOTER ── */
+footer {
+    border-top: 1px solid var(--border);
+    padding: 44px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+}
+.footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 300;
+    letter-spacing: 7px;
+}
+.footer-copy {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+}
+.footer-links {
+    display: flex;
+    gap: 28px;
+}
+.footer-links a {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color .3s;
+}
+.footer-links a:hover { color: var(--gold); }
+
+/* ── REVEAL ANIMATION ── */
+.reveal {
+    opacity: 0;
+    transform: translateY(48px);
+    transition: opacity .9s ease, transform .9s ease;
+}
+.reveal.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+.d1 { transition-delay: .1s; }
+.d2 { transition-delay: .2s; }
+.d3 { transition-delay: .35s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+    .hero {
+        grid-template-columns: 1fr;
+        height: auto;
+        min-height: 100svh;
     }
-    .about{
-        grid-template-columns:1fr;
+    .hero-right { height: 55svh; order: -1; }
+    .hero-right::before {
+        background: linear-gradient(to top, var(--black) 0%, transparent 40%);
     }
+    .hero-left { padding: 40px 6% 80px; justify-content: flex-start; }
+    .hero-scroll { display: none; }
+    .about { grid-template-columns: 1fr; gap: 60px; }
+    .lookbook-grid { grid-template-columns: 1fr 1fr; }
+    .look:nth-child(3) { display: none; }
+    .lookbook-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .lookbook-sub { text-align: left; }
+    nav .nav-links { display: none; }
+    footer { flex-direction: column; gap: 20px; text-align: center; }
+    .contact h2 { font-size: 52px; }
+}
+@media (max-width: 600px) {
+    .lookbook-grid { grid-template-columns: 1fr; }
+    .look:nth-child(3) { display: block; }
+    .about-stats { flex-direction: column; gap: 28px; }
+    .contact-links { flex-direction: column; width: 100%; }
+    .contact-instagram, .contact-whatsapp { width: 100%; justify-content: center; }
 }
 </style>
 </head>
 <body>
 
-<div class="cursor-dot"></div>
-<div class="cursor-outline"></div>
+<!-- CURSOR -->
+<div class="cursor-inner" id="ci"></div>
+<div class="cursor-outer" id="co"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+    <a href="#" class="nav-logo">RN</a>
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#lookbook">Lookbook</a></li>
+        <li><a href="#contact">Collaborate</a></li>
+    </ul>
+</nav>
 
 <!-- HERO -->
-<section class="hero fade-up">
-    <div class="hero-text">
-        <h1>RISHA</h1>
-        <div class="subtitle">Fashion Designer · Influencer</div>
-        <a href="#about" class="cta">Explore My World</a>
+<section class="hero">
+    <div class="hero-left">
+        <div class="hero-eyebrow reveal">Fashion · Influence · Design</div>
+        <h1 class="reveal d1">RISHA<br><em>NAVISHA</em></h1>
+        <p class="hero-desc reveal d2">Contemporary Indian fashion designer and digital tastemaker — crafting statements that transcend trends.</p>
+        <div class="hero-actions reveal d3">
+            <a href="#lookbook" class="btn-primary">View Lookbook</a>
+            <a href="#contact" class="btn-ghost">Collaborate →</a>
+        </div>
     </div>
-    <div class="hero-image">
-        <img src="./hero.jpg" alt="Hero Image" style="width:100%; height:100%; object-fit:cover;">
+    <div class="hero-right">
+        <img src="./hero.jpg" alt="Risha Navisha">
     </div>
-    
+    <div class="hero-scroll">Scroll to explore</div>
 </section>
 
-<!-- ABOUT -->
-<section id="about" class="about fade-up">
-    <div class="portrait">
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+    <div class="marquee-track">
+        <span class="marquee-item">Fashion</span>
+        <span class="marquee-item">Editorial</span>
+        <span class="marquee-item">Design</span>
+        <span class="marquee-item">Influence</span>
+        <span class="marquee-item">Couture</span>
+        <span class="marquee-item">Style</span>
+        <span class="marquee-item">Fashion</span>
+        <span class="marquee-item">Editorial</span>
+        <span class="marquee-item">Design</span>
+        <span class="marquee-item">Influence</span>
+        <span class="marquee-item">Couture</span>
+        <span class="marquee-item">Style</span>
+    </div>
+</div>
 
-        <img src="./2.jpg" alt="Portrait" style="width:100%; height:100%; object-fit:cover;">
+<!-- ABOUT -->
+<section class="about" id="about">
+    <div class="about-img-wrap reveal">
+        <img src="./2.jpg" alt="Risha Navisha Portrait">
     </div>
     <div>
-        <h2>About</h2>
-        <p style="margin-top:20px; line-height:1.8;">
-            Risha is a contemporary Indian fashion designer and digital tastemaker. 
-            Her design philosophy blends structured silhouettes with fluid femininity, 
-            inspired by heritage craftsmanship and modern editorial aesthetics.
-            Through couture storytelling and social influence, she creates 
-            statements that transcend trends.
-        </p>
+        <div class="section-label reveal">The Designer</div>
+        <h2 class="reveal d1">Crafting <em>Stories</em><br>Through Style</h2>
+        <p class="reveal d2">Risha Navisha is a contemporary Indian fashion designer and digital tastemaker. Her design philosophy blends structured silhouettes with fluid femininity, inspired by heritage craftsmanship and modern editorial aesthetics.</p>
+        <p class="reveal d2">Through couture storytelling and social influence, she creates statements that transcend trends — weaving culture, craft, and creativity into every piece.</p>
+        <div class="about-stats reveal d3">
+            <div>
+                <div class="stat-num">50K+</div>
+                <div class="stat-label">Followers</div>
+            </div>
+            <div>
+                <div class="stat-num">200+</div>
+                <div class="stat-label">Looks</div>
+            </div>
+            <div>
+                <div class="stat-num">5+</div>
+                <div class="stat-label">Years</div>
+            </div>
+        </div>
     </div>
 </section>
 
 <!-- LOOKBOOK -->
-<section class="fade-up">
-    <h2 style="margin-bottom:50px;">The Edit</h2>
+<section class="lookbook" id="lookbook">
+    <div class="lookbook-header reveal">
+        <div>
+            <div class="section-label">The Edit</div>
+            <h2>Selected <em>Works</em></h2>
+        </div>
+        <p class="lookbook-sub">A curated collection of looks — where heritage meets contemporary design.</p>
+    </div>
     <div class="lookbook-grid">
-        <div class="look" data-label="Look 01">
-            <img src="./5.jpeg" alt="Look 01" style="width:100%; height:100%; object-fit:cover;">
+        <div class="look reveal">
+            <img src="./5.jpeg" alt="Look 01">
+            <div class="look-overlay"><span class="look-label">Look 01 — Editorial</span></div>
         </div>
-        <div class="look" data-label="Look 02">
-            <img src="./hero.jpg" alt="Look 01" style="width:100%; height:100%; object-fit:cover;">
+        <div class="look reveal d1">
+            <img src="./hero.jpg" alt="Look 02">
+            <div class="look-overlay"><span class="look-label">Look 02 — Couture</span></div>
         </div>
-        <div class="look" data-label="Look 03">     <img src="./4.jpeg" alt="Look 01" style="width:100%; height:100%; object-fit:cover;"></div>
+        <div class="look reveal d2">
+            <img src="./4.jpeg" alt="Look 03">
+            <div class="look-overlay"><span class="look-label">Look 03 — Campaign</span></div>
+        </div>
     </div>
 </section>
 
-<!-- SOCIAL -->
-<section class="social fade-up">
-    <h2>Let's Create Together</h2>
-    <p><a href="https://instagram.com/risha_navisha55" class="gold-link">@risha_navisha55</a></p>
-    <a href="https://wa.me/919264931137" class="whatsapp-btn">WhatsApp: +91 92649 31137</a>
+<!-- CONTACT -->
+<section class="contact" id="contact">
+    <div class="section-label reveal" style="justify-content:center;">Collaborate</div>
+    <h2 class="reveal d1">Let's Create<br><em>Together</em></h2>
+    <p class="contact-sub reveal d2">Open to brand collaborations, editorial features, and creative partnerships. Reach out — let's build something beautiful.</p>
+    <div class="contact-links reveal d3">
+        <a href="https://instagram.com/risha_navisha55" class="contact-instagram">↗ @risha_navisha55</a>
+        <a href="https://wa.me/919264931137" class="contact-whatsapp">WhatsApp</a>
+    </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="fade-up">
-    <div class="logo">RN</div>
-    <p style="margin:20px 0;">© 2026 Risha Navisha</p>
-    <div class="icons">
+<footer>
+    <div class="footer-logo">RN</div>
+    <div class="footer-copy">© 2026 Risha Navisha. All rights reserved.</div>
+    <div class="footer-links">
         <a href="https://instagram.com/risha_navisha55">Instagram</a>
         <a href="https://wa.me/919264931137">WhatsApp</a>
     </div>
 </footer>
 
 <script>
-// Scroll reveal
-const observer=new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-        if(entry.isIntersecting){
-            entry.target.classList.add('show');
-        }
+// ── Scroll reveal ──
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Immediately show hero elements on load
+setTimeout(() => {
+    document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('show'));
+}, 100);
+
+// ── Navbar scroll ──
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+// ── Custom cursor with smooth lerp ──
+const ci = document.getElementById('ci');
+const co = document.getElementById('co');
+let mx = 0, my = 0, ox = 0, oy = 0;
+
+window.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    ci.style.left = mx + 'px';
+    ci.style.top  = my + 'px';
+}, { passive: true });
+
+(function animateCursor() {
+    ox += (mx - ox) * 0.11;
+    oy += (my - oy) * 0.11;
+    co.style.left = ox + 'px';
+    co.style.top  = oy + 'px';
+    requestAnimationFrame(animateCursor);
+})();
+
+document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+        ci.style.width = ci.style.height = '14px';
+        co.style.width = co.style.height = '56px';
     });
-},{threshold:.2});
-
-document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
-
-// Custom cursor
-const dot=document.querySelector('.cursor-dot');
-const outline=document.querySelector('.cursor-outline');
-
-window.addEventListener('mousemove',e=>{
-    dot.style.top=e.clientY+'px';
-    dot.style.left=e.clientX+'px';
-    outline.style.top=e.clientY+'px';
-    outline.style.left=e.clientX+'px';
+    el.addEventListener('mouseleave', () => {
+        ci.style.width = ci.style.height = '8px';
+        co.style.width = co.style.height = '36px';
+    });
 });
 </script>
 

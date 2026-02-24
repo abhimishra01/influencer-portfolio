@@ -1,0 +1,36 @@
+Build a stunning single-page portfolio website for Risha — a female fashion designer and social media influencer based in India.
+
+AESTHETIC DIRECTION: Luxury editorial magazine meets haute couture — think Vogue Arabia meets minimalist dark glamour. Dark charcoal/obsidian backgrounds with champagne gold accents, ivory text, and a feminine serif display font paired with a sleek geometric sans-serif.
+
+DESIGN STYLE:
+- Color palette: #0D0D0D (near-black), #C9A96E (champagne gold), #F5F0E8 (ivory), #1A1A1A (surface)
+- Fonts: "Playfair Display" for headings (Google Fonts), "DM Sans" for body
+- Full-screen hero with dramatic vertical text layout, her name in large serif type
+- Animated golden underline on hover states
+- Subtle grain overlay texture on the background for luxury feel
+- Smooth fade-in stagger animations on page load
+
+SECTIONS:
+
+1. HERO — Full viewport. Large editorial headline: "RISHA" with "Fashion Designer · Influencer" in spaced small caps. A placeholder image frame (styled as a tall portrait/editorial shot) in the center or right side. Floating abstract shapes/lines in gold. CTA button: "Explore My World"
+
+2. ABOUT — Two-column layout. Left: A styled portrait image placeholder with a gold frame border and decorative corner elements. Right: Short bio copy (placeholder text about her design philosophy, style vision, Indian fashion sensibility). Animate text in on scroll.
+
+3. PORTFOLIO / LOOKBOOK — 3-image masonry/editorial grid with hover overlays showing gold tint + label. Title: "The Edit". Each image placeholder labeled "Look 01", "Look 02", "Look 03". Subtle zoom on hover.
+
+4. SOCIAL / COLLAB — Full-width dark section with glowing gold accent. Instagram handle @risha_navisha55 styled as a link. WhatsApp contact +91 92649 31137 as a button with WhatsApp icon. Headline: "Let's Create Together"
+
+5. FOOTER — Minimal. Logo text "RN" in serif, copyright, social icons (Instagram + WhatsApp).
+
+TECHNICAL REQUIREMENTS:
+- Pure HTML + CSS + JavaScript (single file)
+- All image placeholders use elegant styled divs with aspect ratios (portrait 3:4) and placeholder text — easy to swap with real images later
+- Smooth scroll behavior
+- Page load animation: staggered fade-up on all sections
+- Scroll-triggered reveal animations using Intersection Observer
+- Fully responsive (mobile-first)
+- Custom cursor: small gold dot with a trailing circle on desktop
+
+Make every detail feel intentional and high-fashion. This is a portfolio that should make fashion brands want to reach out immediately.
+
+P.S there are 3 images in the directory, pick them for the above

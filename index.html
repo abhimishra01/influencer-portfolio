@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Risha | Fashion Designer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#0D0D0D;
+    --surface:#1A1A1A;
+    --gold:#C9A96E;
+    --ivory:#F5F0E8;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--bg);
+    color:var(--ivory);
+    font-family:'DM Sans',sans-serif;
+    overflow-x:hidden;
+}
+
+/* Grain texture overlay */
+body::before{
+    content:"";
+    position:fixed;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    background-image:url("https://grainy-gradients.vercel.app/noise.svg");
+    opacity:0.05;
+    z-index:1;
+}
+
+/* Custom Cursor */
+.cursor-dot, .cursor-outline{
+    position:fixed;
+    top:0; left:0;
+    pointer-events:none;
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+    z-index:9999;
+}
+.cursor-dot{
+    width:6px;
+    height:6px;
+    background:var(--gold);
+}
+.cursor-outline{
+    width:30px;
+    height:30px;
+    border:1px solid var(--gold);
+    transition:all .15s ease-out;
+}
+
+/* Typography */
+h1,h2,h3{
+    font-family:'Playfair Display',serif;
+    letter-spacing:1px;
+}
+
+section{
+    padding:120px 8%;
+    position:relative;
+    z-index:2;
+}
+
+.fade-up{
+    opacity:0;
+    transform:translateY(40px);
+    transition:all .8s ease;
+}
+.fade-up.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* HERO */
+.hero{
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 8%;
+}
+
+.hero-text{
+    max-width:600px;
+}
+
+.hero h1{
+    font-size:80px;
+    line-height:1.1;
+}
+
+.subtitle{
+    text-transform:uppercase;
+    letter-spacing:5px;
+    font-size:12px;
+    margin-top:20px;
+    color:var(--gold);
+}
+
+.cta{
+    display:inline-block;
+    margin-top:40px;
+    padding:14px 36px;
+    border:1px solid var(--gold);
+    color:var(--ivory);
+    text-decoration:none;
+    position:relative;
+}
+
+.cta::after{
+    content:"";
+    position:absolute;
+    bottom:-5px;
+    left:0;
+    width:0;
+    height:2px;
+    background:var(--gold);
+    transition:width .3s ease;
+}
+
+.cta:hover::after{
+    width:100%;
+}
+
+.hero-image{
+    width:320px;
+    aspect-ratio:3/4;
+    background:var(--surface);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#777;
+    font-size:14px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* ABOUT */
+.about{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+}
+
+.portrait{
+    aspect-ratio:3/4;
+    border:2px solid var(--gold);
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#777;
+}
+
+.portrait::before, .portrait::after{
+    content:"";
+    position:absolute;
+    width:30px;
+    height:30px;
+    border:2px solid var(--gold);
+}
+.portrait::before{
+    top:-10px; left:-10px;
+    border-right:none;
+    border-bottom:none;
+}
+.portrait::after{
+    bottom:-10px; right:-10px;
+    border-left:none;
+    border-top:none;
+}
+
+/* LOOKBOOK */
+.lookbook-grid{
+    columns:3 250px;
+    column-gap:30px;
+}
+
+.look{
+    break-inside:avoid;
+    margin-bottom:30px;
+    aspect-ratio:3/4;
+    background:var(--surface);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+    color:#777;
+}
+
+.look::after{
+    content:attr(data-label);
+    position:absolute;
+    bottom:15px;
+    left:15px;
+    color:var(--gold);
+    letter-spacing:2px;
+}
+
+.look:hover{
+    transform:scale(1.03);
+    transition:.4s;
+}
+
+/* SOCIAL */
+.social{
+    text-align:center;
+    background:var(--surface);
+}
+
+.social h2{
+    margin-bottom:20px;
+}
+
+.gold-link{
+    color:var(--gold);
+    text-decoration:none;
+}
+
+.whatsapp-btn{
+    display:inline-block;
+    margin-top:30px;
+    padding:14px 36px;
+    background:var(--gold);
+    color:#000;
+    text-decoration:none;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:60px 8%;
+    border-top:1px solid #222;
+}
+
+.logo{
+    font-size:40px;
+}
+
+.icons a{
+    margin:0 10px;
+    color:var(--gold);
+    text-decoration:none;
+}
+
+/* Responsive */
+@media(max-width:900px){
+    .hero{
+        flex-direction:column;
+        justify-content:center;
+        text-align:center;
+    }
+    .about{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-outline"></div>
+
+<!-- HERO -->
+<section class="hero fade-up">
+    <div class="hero-text">
+        <h1>RISHA</h1>
+        <div class="subtitle">Fashion Designer · Influencer</div>
+        <a href="#about" class="cta">Explore My World</a>
+    </div>
+    <div class="hero-image">
+        <img src="./hero.jpg" alt="Hero Image" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+    
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about fade-up">
+    <div class="portrait">
+
+        <img src="./2.jpg" alt="Portrait" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+    <div>
+        <h2>About</h2>
+        <p style="margin-top:20px; line-height:1.8;">
+            Risha is a contemporary Indian fashion designer and digital tastemaker. 
+            Her design philosophy blends structured silhouettes with fluid femininity, 
+            inspired by heritage craftsmanship and modern editorial aesthetics.
+            Through couture storytelling and social influence, she creates 
+            statements that transcend trends.
+        </p>
+    </div>
+</section>
+
+<!-- LOOKBOOK -->
+<section class="fade-up">
+    <h2 style="margin-bottom:50px;">The Edit</h2>
+    <div class="lookbook-grid">
+        <div class="look" data-label="Look 01">
+            <img src="./5.jpeg" alt="Look 01" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="look" data-label="Look 02">
+            <img src="./hero.jpg" alt="Look 01" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="look" data-label="Look 03">     <img src="./4.jpeg" alt="Look 01" style="width:100%; height:100%; object-fit:cover;"></div>
+    </div>
+</section>
+
+<!-- SOCIAL -->
+<section class="social fade-up">
+    <h2>Let's Create Together</h2>
+    <p><a href="https://instagram.com/risha_navisha55" class="gold-link">@risha_navisha55</a></p>
+    <a href="https://wa.me/919264931137" class="whatsapp-btn">WhatsApp: +91 92649 31137</a>
+</section>
+
+<!-- FOOTER -->
+<footer class="fade-up">
+    <div class="logo">RN</div>
+    <p style="margin:20px 0;">© 2026 Risha Navisha</p>
+    <div class="icons">
+        <a href="https://instagram.com/risha_navisha55">Instagram</a>
+        <a href="https://wa.me/919264931137">WhatsApp</a>
+    </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add('show');
+        }
+    });
+},{threshold:.2});
+
+document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+
+// Custom cursor
+const dot=document.querySelector('.cursor-dot');
+const outline=document.querySelector('.cursor-outline');
+
+window.addEventListener('mousemove',e=>{
+    dot.style.top=e.clientY+'px';
+    dot.style.left=e.clientX+'px';
+    outline.style.top=e.clientY+'px';
+    outline.style.left=e.clientX+'px';
+});
+</script>
+
+</body>
+</html>
